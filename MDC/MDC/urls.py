@@ -81,13 +81,14 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 # Serializers define the API representation.
 class TradeSerializer(serializers.HyperlinkedModelSerializer):
 
-    image = Base64ImageField(
+    photo = Base64ImageField(
         max_length=None, use_url=True,
     )
 
     class Meta:
         model = Trade
-        fields = ('image',)
+        fields = ('photo','enter','profit','stop','date','result','tradeType','time',)
+
 
 # ViewSets define the view behavior.
 class UserViewSet(viewsets.ModelViewSet):
@@ -104,7 +105,7 @@ router.register(r'users', UserViewSet)
 router.register(r'trades', TradeViewSet)
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    url(r'^api/', include(router.urls)),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

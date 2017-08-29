@@ -17,7 +17,9 @@ from django.contrib import admin
 from django.conf.urls import url, include
 from django.contrib.auth.models import User
 from trade.models import *
+
 from rest_framework import routers, serializers, viewsets
+from rest_framework.authtoken import views
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -107,6 +109,7 @@ router.register(r'trades', TradeViewSet)
 urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^admin/', admin.site.urls),
+    url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 

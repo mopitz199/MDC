@@ -67,6 +67,12 @@ class TradeSerializer(serializers.ModelSerializer):
         max_length=None, use_url=True,
     )
 
+    photoThumbnail = serializers.SerializerMethodField('getPhotoThumbnailUrl')
+
+    def getPhotoThumbnailUrl(self, obj):
+        request = self.context.get('request')
+        return request.build_absolute_uri(obj.photoThumbnail.url)
+
     class Meta:
         model = Trade
-        fields = ('photo','enter','profit','stop','date','result','tradeType','time','user')
+        fields = ('id', 'photo', 'photoThumbnail', 'enter','profit','stop','date','result','tradeType','time','user', 'ts')

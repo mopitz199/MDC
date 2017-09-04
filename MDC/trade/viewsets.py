@@ -13,7 +13,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 class TradeViewSet(viewsets.ModelViewSet):
-    queryset = Trade.objects.all()
+    queryset = Trade.objects.all().order_by('-ts')
     serializer_class = TradeSerializer
 
     def create(self, request, *args, **kwargs):

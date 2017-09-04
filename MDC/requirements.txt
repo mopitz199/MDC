@@ -1,5 +1,10 @@
-django==1.11.4
-psycopg2==2.7.3
+Django==1.11.4
+django-appconf==1.0.2
+django-imagekit==4.0.1
 djangorestframework==3.6.3
+olefile==0.44
+pilkit==2.0
 Pillow==4.2.1
+psycopg2==2.7.3
+pytz==2017.2
 six==1.10.0

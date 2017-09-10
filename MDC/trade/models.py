@@ -19,8 +19,9 @@ class Trade(models.Model):
     result = models.CharField(null=True, max_length=20)
     tradeType = models.CharField(null=True, max_length=20)
     time = models.TimeField(null=True)
+    ts = models.DateTimeField(auto_now_add=True)
 
-    def save(self):
+    def save(self, force_insert=False, force_update=False, using=None):
         if not self.pk:
             super(Trade, self).save()
             image = Image.open(self.photo)
@@ -29,6 +30,5 @@ class Trade(models.Model):
             size = (700, int(700*factor))
             image = image.resize(size, Image.ANTIALIAS)
             image.save(self.photo.path)
-
-
-    ts = models.DateTimeField(auto_now_add=True)
+        else:
+            super(Trade, self).save()

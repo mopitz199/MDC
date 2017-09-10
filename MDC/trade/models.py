@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
-
+from PIL import Image
 
 class Trade(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -19,5 +19,16 @@ class Trade(models.Model):
     result = models.CharField(null=True, max_length=20)
     tradeType = models.CharField(null=True, max_length=20)
     time = models.TimeField(null=True)
+
+    def save(self):
+        if not self.pk:
+            super(Trade, self).save()
+            image = Image.open(self.photo)
+            (width, height) = image.size
+            factor = height/width
+            size = (700, int(700*factor))
+            image = image.resize(size, Image.ANTIALIAS)
+            image.save(self.photo.path)
+
 
     ts = models.DateTimeField(auto_now_add=True)

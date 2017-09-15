@@ -21,6 +21,10 @@ class Trade(models.Model):
     time = models.TimeField(null=True)
     ts = models.DateTimeField(auto_now_add=True)
 
+
+    def getResultAmmount(self):
+        return abs((self.enter-self.profit)) if self.result == 'w' else -1*abs((self.enter-self.stop))
+
     def save(self, force_insert=False, force_update=False, using=None):
         if not self.pk:
             super(Trade, self).save()

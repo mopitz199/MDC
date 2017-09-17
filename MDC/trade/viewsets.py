@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework.response import Response
+from rest_framework.request import Request
 from rest_framework import status
 from rest_framework import routers, serializers, viewsets
 from rest_framework.authtoken import views
@@ -14,10 +15,17 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    @list_route(methods=['get'])
+    def getCurrentUser(self, request):
+        user = request.user
+        serializer_context = {'request': Request(request),}
+        serializer = UserSerializer(user, context=serializer_context)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
 class TradeViewSet(viewsets.ModelViewSet):
     queryset = Trade.objects.all().order_by('-ts')
     serializer_class = TradeSerializer
-    #permission_classes = (permissions.IsAuthenticated,)
+    filter_fields = ('user',)
 
     def create(self, request, *args, **kwargs):
         data = request.data
@@ -37,10 +45,12 @@ class TradeViewSet(viewsets.ModelViewSet):
         fromDate = request.GET.get('from', None)
         toDate = request.GET.get('to', None)
 
-        resp = {
-            'won': 0,
-            'lost': 0
-        }
+        if not fromDate and not toDate:
+            return Response({
+                'error': 'Debe entregar una fecha desde y hasta'
+                }, status=status.HTTP_400_BAD_REQUEST)
+
+        resp = {'won': 0,'lost': 0}
 
         trades = Trade.objects.filter(user=user, date__lte=toDate, date__gte=fromDate)
 

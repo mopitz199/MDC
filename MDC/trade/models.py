@@ -32,7 +32,7 @@ class Trade(models.Model):
             (width, height) = image.size
             factor = height/width
             size = (700, int(700*factor))
-            image = image.resize(size, Image.ANTIALIAS)
-            image.save(self.photo.path)
+            image = image.resize(size)
+            image.save(self.photo.path, quality=75)
         else:
             super(Trade, self).save()

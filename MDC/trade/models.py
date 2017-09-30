@@ -31,7 +31,7 @@ class Trade(models.Model):
             image = Image.open(self.photo)
             (width, height) = image.size
             factor = height/width
-            size = (800, int(800*factor))
+            size = (700, int(700*factor))
             image = image.resize(size, Image.BILINEAR)
             image.save(self.photo.path, quality=85)
         else:

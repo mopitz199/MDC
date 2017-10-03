@@ -23,7 +23,10 @@ class Trade(models.Model):
 
 
     def getResultAmmount(self):
-        return abs((self.enter-self.profit)) if self.result == 'w' else -1*abs((self.enter-self.stop))
+        if self.result == 'w':
+            return self.profit
+        else:
+            return (self.stop)*-1
 
     def save(self, force_insert=False, force_update=False, using=None):
         if not self.pk:

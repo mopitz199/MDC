@@ -12,16 +12,24 @@ services:
       - db_data:/var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432"
-
   web:
     build: ./MDC
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn -c gunicorn.conf MDC.wsgi
     volumes:
       - ./MDC:/MDC
     ports:
       - "8000:8000"
     depends_on:
       - db
+  nginx:
+    build: ./nginx
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+    volumes:
+      - ./MDC/static:/var/www/static
+      - ./MDC/media:/var/www/media
 
 volumes:
   db_data:

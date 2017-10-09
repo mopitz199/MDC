@@ -3,6 +3,7 @@ django-appconf==1.0.2
 django-filter==1.0.4
 django-imagekit==4.0.1
 djangorestframework==3.6.3
+gunicorn==19.7.1
 olefile==0.44
 pilkit==2.0
 Pillow==4.2.1

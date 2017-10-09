@@ -8,6 +8,7 @@
 .tox/
 __pycache__
 media/
+static/
 MANIFEST
 dist/
 docs/_build/

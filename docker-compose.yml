@@ -25,6 +25,7 @@ services:
     build: ./nginx
     depends_on:
       - web
+    command: nginx -g 'daemon off;'
     ports:
       - "80:80"
     volumes:

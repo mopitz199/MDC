@@ -57,7 +57,7 @@ class Base64ImageField(serializers.ImageField):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id','url', 'username', 'email', 'is_staff')
+        fields = ('id','url', 'username', 'email', 'is_staff', 'first_name', 'last_name')
 
 
 # Serializers define the API representation.

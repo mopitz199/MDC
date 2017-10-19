@@ -14,7 +14,7 @@ services:
       - "5432:5432"
   web:
     build: ./MDC
-    command: gunicorn -p /tmp/gunicorn.pid -c gunicorn.conf MDC.wsgi
+    command: gunicorn -c gunicorn.conf MDC.wsgi
     volumes:
       - ./MDC:/MDC
     ports:

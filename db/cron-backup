@@ -1,0 +1,1 @@
+* * * * * root pg_dump -U admin -Fc base_datos -f /backups/db.dump

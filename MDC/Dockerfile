@@ -9,6 +9,10 @@ RUN mkdir $WEBAPP_DIR
 
 WORKDIR $WEBAPP_DIR
 
+RUN apt-get update
+RUN apt-get install gnome-schedule -y
+RUN apt-get install nano -y
+
 ADD requirements.txt $WEBAPP_DIR/
 RUN pip install -r requirements.txt
 

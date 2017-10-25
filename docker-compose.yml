@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: postgres:9.5
+    build: ./db
     environment:
       - POSTGRES_DB=base_datos
       - POSTGRES_USER=admin
@@ -10,6 +10,7 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - db_data:/var/lib/postgresql/data/pgdata
+      - mdc_backups:/backups
     ports:
       - "5432:5432"
   web:
@@ -34,4 +35,6 @@ services:
 
 volumes:
   db_data:
+    external: true
+  mdc_backups:
     external: true

@@ -1,0 +1,2 @@
+4 4 * * * root /var/backup.sh
+4 4 1 * * root /var/clean-backup.sh

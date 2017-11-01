@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 't63tcw-%=zbd^js*+djx-aly+n&1)e7ip+v9w(7owmerlrt_f)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = ["104.154.20.121", "localhost"]
 
@@ -81,14 +81,15 @@ WSGI_APPLICATION = 'MDC.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'base_datos',
-        'USER': 'admin',
-        'PASSWORD': 'secret',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': 'db',
         'PORT': '5432',
     }
 }
 
+SENGRID_KEY = os.getenv('SENGRID_KEY')
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators

@@ -13,11 +13,13 @@ services:
 
   web:
     build: ./MDC
-    command: python manage.py runserver 0.0.0.0:8000  --settings=MDC.settings-dev
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./MDC:/MDC
     ports:
       - "8000:8000"
+    env_file:
+      - ./MDC/.env
     depends_on:
       - db
 

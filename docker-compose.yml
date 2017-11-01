@@ -10,7 +10,7 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - db_data:/var/lib/postgresql/data/pgdata
-      - mdc_backups:/backups
+      - mdc_backups:/var/backups
     ports:
       - "5432:5432"
   web:
@@ -20,6 +20,8 @@ services:
       - ./MDC:/MDC
     ports:
       - "8000:8000"
+    env_file:
+      - ./MDC/.env
     depends_on:
       - db
   nginx:

@@ -1,9 +1,5 @@
 FROM postgres:9.5
 
-# RUN apt-get update
-# RUN apt-get install gnome-schedule -y
-# RUN apt-get install nano -y
-
 ADD cron /etc/cron.d/cron
 ADD backup.sh /var/backup.sh
 ADD clean-backup.sh /var/clean-backup.sh

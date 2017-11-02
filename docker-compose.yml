@@ -1,6 +1,11 @@
 version: '3'
 
 services:
+  redis:
+    image: redis
+    command: redis-server
+    ports:
+      - '6379:6379'
   db:
     build: ./db
     environment:
@@ -27,6 +32,8 @@ services:
       prod: 'true'
     depends_on:
       - db
+    links:
+      - redis
   nginx:
     build: ./nginx
     depends_on:

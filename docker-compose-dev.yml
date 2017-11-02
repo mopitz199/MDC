@@ -1,6 +1,11 @@
 version: '3'
 
 services:
+  redis:
+    image: redis
+    command: redis-server
+    ports:
+      - '6379:6379'
   db:
     image: postgres:9.5
     environment:
@@ -25,6 +30,8 @@ services:
       prod: 'false'
     depends_on:
       - db
+    links:
+      - redis
 
 volumes:
   db_data:

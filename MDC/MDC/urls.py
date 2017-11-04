@@ -34,6 +34,10 @@ router.register(r'trades', TradeViewSet)
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),
+    url(r'^api/generateRecoveryCode/$', GenerateRecoveryCode.as_view()),
+    url(r'^api/validateRecoveryCode/$', ValidateRecoveryCode.as_view()),
+    url(r'^api/changePassword/$', ChangePassword.as_view()),
+
     url(r'^admin/', admin.site.urls),
     url(r'^api-token-auth/', views.obtain_auth_token),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))

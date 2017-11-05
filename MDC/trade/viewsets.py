@@ -26,8 +26,10 @@ class GenerateRecoveryCode(APIView):
     """
     def post(self, request):
         email = request.data['email'] if 'email' in request.data else None
+        print(email)
         code = ''.join(random.choice('0123456789ABCDEF') for i in range(6))
         res = cache.set(code, email, timeout=60*60*24) # 1 day
+        print(res)
         if res and User.objects.filter(email=email).exists():
             msg = 'El codigo para recuperar su clave es: {}'.format(code)
             result = sendEmail(toEmail=email, sub='Codigo de recuperacion', msg=msg)

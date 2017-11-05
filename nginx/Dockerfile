@@ -1,6 +1,7 @@
 FROM nginx:latest
 
 ADD nginx.conf /etc/nginx/nginx.conf
+RUN chown -R nginx:nginx /dev/stdout
 
 RUN mkdir -p /var/www/media
 RUN mkdir -p /var/www/static

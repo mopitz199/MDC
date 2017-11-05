@@ -25,7 +25,7 @@ SECRET_KEY = 't63tcw-%=zbd^js*+djx-aly+n&1)e7ip+v9w(7owmerlrt_f)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if os.getenv('PROD')=='true' else True
 
-ALLOWED_HOSTS = ["104.154.186.29",] if os.getenv('PROD')=='true' else ['*']
+ALLOWED_HOSTS = ["104.154.186.29","*"] if os.getenv('PROD')=='true' else ['*']
 
 
 # Application definition

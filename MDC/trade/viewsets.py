@@ -66,9 +66,6 @@ class ValidateRecoveryCode(APIView):
                 'error': u'El codigo es invalido'
                 }, status=status.HTTP_400_BAD_REQUEST)
 
-    def get(self, request):
-        pass
-
 
 class ChangePassword(APIView):
 

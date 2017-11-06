@@ -25,7 +25,7 @@ SECRET_KEY = 't63tcw-%=zbd^js*+djx-aly+n&1)e7ip+v9w(7owmerlrt_f)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False if os.getenv('PROD')=='true' else True
 
-ALLOWED_HOSTS = ["104.154.186.29","*"] if os.getenv('PROD')=='true' else ['*']
+ALLOWED_HOSTS = ["104.154.186.29", "localhost"] if os.getenv('PROD')=='true' else ['*']
 
 
 # Application definition
@@ -100,6 +100,27 @@ CACHES = {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     }
+}
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+        'logfile': {
+            'level':'DEBUG',
+            'class':'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logfile')
+        },
+    },
+    'root': {
+        'level': 'INFO',
+        'handlers': ['console', 'logfile']
+    },
 }
 
 

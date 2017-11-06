@@ -31,15 +31,15 @@ class GenerateRecoveryCode(APIView):
         res = cache.set(code, email, timeout=60*60*24) # 1 day
         print(res)
         if res and User.objects.filter(email=email).exists():
-            msg = 'El codigo para recuperar su clave es: {}'.format(code)
-            result = sendEmail(toEmail=email, sub='Codigo de recuperacion', msg=msg)
+            msg = 'Your recovery code is: {}'.format(code)
+            result = sendEmail(toEmail=email, sub='Recovery code', msg=msg)
             if result[0]:
                 return Response({'status': 'ok'}, status=status.HTTP_202_ACCEPTED)
             else:
                 return Response({'error': result[1]}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response({
-                'error': u'No se pudo generar el codigo de recuperación'
+                'error': u'We couldn\'t generate the recovery code'
                 }, status=status.HTTP_400_BAD_REQUEST)
         return Response({'status': 'ok'}, status=status.HTTP_202_ACCEPTED)
 
@@ -63,7 +63,7 @@ class ValidateRecoveryCode(APIView):
             return Response(resp, status=status.HTTP_202_ACCEPTED)
         else:
             return Response({
-                'error': u'El codigo es invalido'
+                'error': u'Invalid code'
                 }, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -87,7 +87,7 @@ class ChangePassword(APIView):
             return Response({'status': 'ok'}, status=status.HTTP_202_ACCEPTED)
         else:
             return Response({
-                'error': u'No se pudo cambiar la clave'
+                'error': u'We couldn\'t change the password'
                 }, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -144,7 +144,7 @@ class TradeViewSet(viewsets.ModelViewSet):
 
         if not fromDate and not toDate:
             return Response({
-                'error': 'Debe entregar una fecha desde y hasta'
+                'error': u'You must give a two dates'
                 }, status=status.HTTP_400_BAD_REQUEST)
 
         resp = {'won': 0,'lost': 0}

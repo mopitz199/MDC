@@ -1,18 +1,19 @@
 FROM postgres:9.5
 
-ADD cron /etc/cron.d/cron
-ADD backup.sh /var/backup.sh
-ADD clean-backup.sh /var/clean-backup.sh
-ADD postgresql.conf /etc/postgresql.conf
+RUN mkdir /var/pg
+RUN mkdir /var/pg/log
+RUN mkdir /var/pg/backups
 
-RUN mkdir /var/pg_log
+ADD cron /etc/cron.d/cron
+ADD backup.sh /var/pg/backup.sh
+ADD clean-backup.sh /var/pg/clean-backup.sh
+ADD postgresql.conf /etc/postgresql.conf
 
 # Give execution rights on the cron job
 RUN chmod 0644 /etc/cron.d/cron
-RUN chmod 760 /var/backup.sh
-RUN chmod 760 /var/clean-backup.sh
-RUN chmod 777 /var/clean-backup.sh
-RUN chown -R postgres:postgres /var/pg_log
+RUN chown -R postgres:postgres /var/pg
+RUN chmod 760 /var/pg/backup.sh
+RUN chmod 760 /var/pg/clean-backup.sh
 
 RUN /etc/init.d/cron start
 

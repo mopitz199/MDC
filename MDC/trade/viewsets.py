@@ -134,6 +134,23 @@ class TradeViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return TradeSerializer
+        if self.action == 'create':
+            return TradeSerializer
+        if self.action == 'retrieve':
+            return TradeSerializer
+        if self.action == 'update':
+            return TradeUpdateSerializer
+        if self.action == 'partial_update':
+            return TradeUpdateSerializer
+        if self.action == 'destroy':
+            return TradeSerializer
+        return TradeSerializer
+
+
     @list_route(methods=['get'])
     def getStatistics(self, request):
 

@@ -60,7 +60,12 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id','url', 'username', 'email', 'is_staff', 'first_name', 'last_name')
 
 
-# Serializers define the API representation.
+class TradeUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Trade
+        fields = ('id', 'enter','profit','stop','date','result','tradeType','time','user', 'ts')
+
+
 class TradeSerializer(serializers.ModelSerializer):
 
     photo = Base64ImageField(

@@ -6,7 +6,7 @@ from PIL import Image
 
 class Trade(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    photo = models.ImageField(blank=False, null=True, upload_to='tradePics')
+    photo = models.ImageField(blank=True, null=True, upload_to='tradePics')
     photoThumbnail = ImageSpecField(source='photo',
                                       processors=[ResizeToFill(100, 100)],
                                       format='JPEG',

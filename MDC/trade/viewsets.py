@@ -130,7 +130,7 @@ class TradeViewSet(viewsets.ModelViewSet):
     serializer_class = TradeSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter)
     filter_fields = ('user', 'result', 'profit', 'stop', 'tradeType', 'time')
-    ordering_fields = ('stop', 'date')
+    ordering_fields = ('stop', 'date', 'profit', 'time')
 
     def create(self, request, *args, **kwargs):
         data = request.data

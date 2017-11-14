@@ -1,19 +1,25 @@
 from django.shortcuts import render
+from django.contrib.auth.models import User
+
+from rest_framework import routers, serializers, viewsets, status, permissions
 from rest_framework.response import Response
 from rest_framework.request import Request
-from rest_framework import status
-from rest_framework import routers, serializers, viewsets
 from rest_framework.authtoken import views
-from django.contrib.auth.models import User
-from rest_framework import permissions
 from rest_framework.decorators import list_route
+from rest_framework.views import APIView
+from rest_framework.filters import BaseFilterBackend, OrderingFilter, SearchFilter
+
+from django_filters.rest_framework import DjangoFilterBackend
+
 from .models import *
 from trade.serializers import *
 from django.core.cache import cache
 import random
 from .utils import *
-from rest_framework import permissions
-from rest_framework.views import APIView
+
+
+
+
 
 
 class GenerateRecoveryCode(APIView):
@@ -122,7 +128,9 @@ class UserViewSet(viewsets.ModelViewSet):
 class TradeViewSet(viewsets.ModelViewSet):
     queryset = Trade.objects.all().order_by('-ts')
     serializer_class = TradeSerializer
-    filter_fields = ('user',)
+    filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter)
+    filter_fields = ('user', 'result', 'profit', 'stop', 'tradeType', 'time')
+    ordering_fields = ('stop', 'date')
 
     def create(self, request, *args, **kwargs):
         data = request.data

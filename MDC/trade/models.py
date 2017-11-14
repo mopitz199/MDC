@@ -28,6 +28,7 @@ class Trade(models.Model):
         else:
             return (self.stop)*-1
 
+    """
     def save(self, force_insert=False, force_update=False, using=None):
         if not self.pk:
             super(Trade, self).save()
@@ -39,3 +40,4 @@ class Trade(models.Model):
             image.save(self.photo.path, quality=85)
         else:
             super(Trade, self).save()
+    """

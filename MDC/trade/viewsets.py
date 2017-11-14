@@ -126,7 +126,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class TradeViewSet(viewsets.ModelViewSet):
-    queryset = Trade.objects.all().order_by('-ts')
+    queryset = Trade.objects.all().order_by('-date')
     serializer_class = TradeSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter, SearchFilter)
     filter_fields = ('user', 'result', 'profit', 'stop', 'tradeType', 'time')

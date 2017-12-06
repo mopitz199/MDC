@@ -28,8 +28,8 @@ class Trade(models.Model):
         else:
             return (self.stop)*-1
 
-    """
-    def save(self, force_insert=False, force_update=False, using=None):
+
+    def save(self, **kwargs):
         if not self.pk:
             super(Trade, self).save()
             image = Image.open(self.photo)
@@ -37,7 +37,6 @@ class Trade(models.Model):
             factor = height/width
             size = (700, int(700*factor))
             image = image.resize(size, Image.BILINEAR)
-            image.save(self.photo.path, quality=85)
+            image.save(self.photo.path, quality=100)
         else:
             super(Trade, self).save()
-    """

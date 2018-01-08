@@ -15,7 +15,7 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - db_data:/var/lib/postgresql/data/pgdata
-      - mdc_backups:/var/pg/backups
+      - ./db/backups:/var/pg/backups
     ports:
       - "5432:5432"
   web:
@@ -46,6 +46,4 @@ services:
 
 volumes:
   db_data:
-    external: true
-  mdc_backups:
     external: true

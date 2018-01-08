@@ -10,6 +10,7 @@ __pycache__
 logfile
 media/
 static/
+db/backups/
 MANIFEST
 dist/
 docs/_build/

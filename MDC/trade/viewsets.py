@@ -108,7 +108,7 @@ class UserViewSet(viewsets.ModelViewSet):
     @list_route(methods=['get'])
     def getCurrentUser(self, request):
         user = request.user
-        serializer_context = {'request': Request(request),}
+        serializer_context = {'request': request}
         serializer = UserSerializer(user, context=serializer_context)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
@@ -120,7 +120,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def getOtherUsers(self, request):
         user = request.user
         otherUsers = User.objects.all().exclude(id=user.id)
-        serializer_context = {'request': Request(request),}
+        serializer_context = {'request': request,}
         serializer = UserSerializer(otherUsers, many=True, context=serializer_context)
         return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 

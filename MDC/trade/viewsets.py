@@ -19,9 +19,6 @@ from .utils import *
 
 
 
-
-
-
 class GenerateRecoveryCode(APIView):
 
     authentication_classes = ()

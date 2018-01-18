@@ -1,5 +1,4 @@
-from rest_framework import routers, serializers, viewsets
-from rest_framework.authtoken import views
+from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import *
 
